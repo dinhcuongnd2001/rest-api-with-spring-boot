@@ -2,6 +2,8 @@ package com.dnc.springboot.cruddemo.rest;
 
 import com.dnc.springboot.cruddemo.dao.EmployeeDAO;
 import com.dnc.springboot.cruddemo.entity.Employee;
+import com.dnc.springboot.cruddemo.service.EmployeeService;
+import com.dnc.springboot.cruddemo.service.EmployeeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,16 +16,16 @@ import java.util.List;
 public class EmployeeRestController {
 
     //    quick and dirty: inject employee dao
-    private EmployeeDAO employeeDAO;
+    private EmployeeService employeeService;
 
-//    @Autowired
-    public EmployeeRestController(EmployeeDAO employeeDAO) {
-        this.employeeDAO = employeeDAO;
+    @Autowired
+    public EmployeeRestController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
     }
 
     @GetMapping("/employees")
     public List<Employee> findAll() {
-        return this.employeeDAO.findAll();
+        return this.employeeService.findAll();
     }
 
 }
